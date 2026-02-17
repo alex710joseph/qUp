@@ -2,10 +2,10 @@
   "name": "qup",
   "version": "1.0.0",
   "description": "A virtual queue management platform designed to eliminate physical waiting lines.",
-  "main": "backend.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon.js backend.js",
+    "start": "node ./node_modules/nodemon/bin/nodemon.js server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint"
   },
@@ -33,6 +33,7 @@
   "dependencies": {
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "mongodb": "^7.1.0",
     "nodemon": "^3.1.11"
   }
