@@ -65,4 +65,18 @@ if (createForm) {
   });
 }
 
+const joinForm = document.querySelector("#join-queue form");
+
+if (joinForm) {
+  joinForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const queueId = document.getElementById("queueId").value.trim();
+
+    if (!queueId) return;
+
+    window.location.href = `/guest.html?id=${queueId}`;
+  });
+}
+
 loadUser();
