@@ -10,11 +10,12 @@ router.use((req, res, next) => {
   next();
 });
 
+// GET /api/host/host-ping (test route for host role)
 router.get("/host-ping", (req, res) => {
   res.json({ message: "Hello, Host!" });
 });
 
-// POST /api/host/queue
+// POST /api/host/queue (create a new queue)
 router.post("/queue", async (req, res) => {
   try {
     const db = await connectDB();

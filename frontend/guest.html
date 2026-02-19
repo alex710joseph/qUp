@@ -33,8 +33,46 @@
             </div>
         </div>
     </nav>
-    <main class="flex-grow-1">
-        <h1>Guest Page</h1>
+    <main class="flex-grow-1 py-2">
+        <div class="row justify-content-center">
+            <div class="col-md-10 col-lg-8">
+
+                <div class="card shadow-sm border-0 text-center">
+
+                    <span id="queueStatus" class="position-absolute top-0 start-0 badge rounded-pill bg-success m-3">
+                    </span>
+
+                    <div class="card-body p-4">
+                        <h2 id="queueName" class="h4 mb-4 text-dark"></h2>
+                        <p id="queueAddress" class="text-muted"></p>
+
+                        <div class="row mb-4">
+                            <div class="col">
+                                <p class="text-muted mb-1">Wait Time</p>
+                                <div class="status-value text-dark"><span id="estimatedWait"></span> mins</div>
+                            </div>
+                            <div class="col border-start">
+                                <p class="text-muted mb-1">In Queue</p>
+                                <div id="waitingCount" class="status-value text-dark"></div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-grid gap-2 mt-4">
+                            <button id="btn-join" class="btn btn-dark btn-lg">
+                                Join Queue
+                            </button>
+                            <button id="btn-exit" class="btn btn-outline-danger btn-lg disabled">
+                                Exit Queue
+                            </button>
+                        </div>
+                        <div id="positionSection" class="mt-3"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </main>
     <footer class="text-center py-2 border-top bg-light">
         <p class="mb-0">&copy; 2026 Alex Joseph &middot; Rajiv Philip &middot; MIT License</p>
