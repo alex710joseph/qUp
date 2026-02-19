@@ -38,7 +38,7 @@
       <h1 class="display-4 fw-bold">Welcome to qUp</h1>
       <p class="lead mt-4">No more waiting in physical lines.</p>
     </div>
-    <div id="create-queue" class="container mb-5">
+    <div id="create-queue" class="container mb-5 d-none">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
           <div class="card shadow-sm border-0 mt-4 bg-light">
@@ -80,7 +80,7 @@
         </div>
       </div>
     </div>
-    <div id="join-queue" class="container mb-5">
+    <div id="join-queue" class="container mb-5 d-none">
       <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
           <div class="card shadow-sm border-0 mt-4 bg-light">
@@ -92,7 +92,8 @@
                   <label for="queueId" class="form-label fw-semibold">Enter Queue ID</label>
                   <div class="input-group">
                     <span class="input-group-text bg-dark text-white border-dark">Q #</span>
-                    <input type="text" id="queueId" class="form-control" placeholder="12345" required>
+                    <input type="text" id="queueId" class="form-control" placeholder="6995735e1ab6553f44234461"
+                      required>
                   </div>
                   <div class="form-text mt-2">The unique queue ID provided by the shop owner.</div>
                 </div>
@@ -106,6 +107,20 @@
         </div>
       </div>
     </div>
+    <div class="container text-center mb-4">
+      <button id="btn-popular-toggle" class="btn btn-outline-dark rounded-pill px-4 d-none">
+        Load Popular Queues
+      </button>
+    </div>
+    <div id="popular-queues" class="container mb-5 d-none">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <h2 class="h4 mb-4 text-center">Popular Queues</h2>
+          <div id="popular-list" class="row g-4"></div>
+        </div>
+      </div>
+    </div>
+
   </main>
   <footer class="text-center py-2 border-top bg-light">
     <p class="mb-0">&copy; 2026 Alex Joseph &middot; Rajiv Philip &middot; MIT License</p>

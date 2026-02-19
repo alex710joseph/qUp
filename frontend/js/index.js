@@ -1,5 +1,11 @@
 const createQueueContainer = document.getElementById("create-queue");
 const joinQueueContainer = document.getElementById("join-queue");
+const popularSection = document.getElementById("popular-queues");
+const popularList = document.getElementById("popular-list");
+const toggleBtn = document.getElementById("btn-popular-toggle");
+
+let popularLoaded = false;
+let popularVisible = false;
 
 async function loadUser() {
   try {
@@ -14,11 +20,12 @@ async function loadUser() {
     console.log("User data:", data);
 
     if (data.role == "host") {
-      createQueueContainer.style.display = "block";
+      createQueueContainer.classList.remove("d-none");
     }
 
     if (data.role == "guest") {
-      joinQueueContainer.style.display = "block";
+      joinQueueContainer.classList.remove("d-none");
+      toggleBtn.classList.remove("d-none");
     }
   } catch (err) {
     console.error("Error fetching user data:", err);
@@ -78,5 +85,67 @@ if (joinForm) {
     window.location.href = `/guest.html?id=${queueId}`;
   });
 }
+
+async function loadPopularQueues() {
+  try {
+    const res = await fetch("/api/guest/queues/latest");
+
+    if (!res.ok) return;
+
+    const queues = await res.json();
+
+    popularSection.classList.remove("d-none");
+
+    popularList.innerHTML = "";
+
+    queues.forEach((queue) => {
+      const col = document.createElement("div");
+      col.className = "col-md-6 col-lg-4";
+
+      col.innerHTML = `
+        <div class="card shadow-sm h-100 border-0">
+          <div class="card-body">
+            <h5 class="card-title">${queue.name}</h5>
+            <p class="text-muted small">${queue.address}</p>
+            <div class="d-grid mt-3">
+              <button class="btn btn-dark join-btn" data-id="${queue._id}">
+                View Queue
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      popularList.appendChild(col);
+    });
+
+    // Attach click events
+    document.querySelectorAll(".join-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        window.location.href = `/guest.html?id=${id}`;
+      });
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+toggleBtn.addEventListener("click", async () => {
+  if (!popularLoaded) {
+    await loadPopularQueues();
+    popularLoaded = true;
+  }
+
+  if (popularVisible) {
+    popularSection.classList.add("d-none");
+    toggleBtn.textContent = "Load Popular Queues";
+    popularVisible = false;
+  } else {
+    popularSection.classList.remove("d-none");
+    toggleBtn.textContent = "Hide Popular Queues";
+    popularVisible = true;
+  }
+});
 
 loadUser();

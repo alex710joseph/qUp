@@ -142,6 +142,7 @@ router.post("/join/:queueId", async (req, res) => {
   }
 });
 
+// POST /api/guest/exit/:queueId (exit a queue)
 router.post("/exit/:queueId", async (req, res) => {
   try {
     const db = await connectDB();
@@ -163,6 +164,26 @@ router.post("/exit/:queueId", async (req, res) => {
     }
 
     res.json({ message: "Exited successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// latest 10 queues
+// GET /api/guest/queues/latest
+router.get("/queues/latest", async (req, res) => {
+  try {
+    const db = await connectDB();
+
+    const queues = await db
+      .collection("queues")
+      .find({ status: "open" })
+      .sort({ createdAt: -1 })
+      .limit(10)
+      .toArray();
+
+    res.json(queues);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
