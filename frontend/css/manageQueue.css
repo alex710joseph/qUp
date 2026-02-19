@@ -1,7 +1,3 @@
-/* queue.css */
-
-/* Custom overrides for specific visual requirements */
-
 /* 1. Navbar Logo Box */
 .navbar-brand {
     background-color: #e2e6ea !important; /* Bootstrap's gray-200 equivalent */
@@ -44,11 +40,4 @@
     font-size: 0.9rem;
     min-width: 80px;
     text-align: center;
-}
-
-/* 4. Queue Items (Empty/Right Column) */
-.queue-slot-empty {
-    height: 82px; /* Match approximate height of active items */
-    border: 1px solid #dee2e6;
-    margin-bottom: -1px;
 }
