@@ -62,7 +62,7 @@ router.get("/getQueuelist", async (req, res) => {
       .aggregate(pipeline)
       .toArray();
 
-    console.log("✅ Query successful, results:", queueList.length);
+    console.log("Query successful, results:", queueList.length);
     res.json({ queue: queueList });
   } catch (error) {
     console.error("Full error details:", error);
