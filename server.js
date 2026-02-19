@@ -5,6 +5,7 @@ import guestRouter from "./routes/guest.js";
 import hostRouter from "./routes/host.js";
 import connectDB from "./db/dbConnection.js";
 import authRouter from "./routes/auth.js";
+import queueRouter from "./routes/queue.js";
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ async function startServer() {
     app.use("/api/auth", authRouter);
     app.use("/api/guest", guestRouter);
     app.use("/api/host", hostRouter);
+    app.use("/api/queue", queueRouter);
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
