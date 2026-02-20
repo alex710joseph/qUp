@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>qUp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/main.css" />
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg shadow-sm bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand px-4 py-2" href="#">qUp</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item pb-1">
+                        <a class="nav-link active border border-dark rounded-pill px-3" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item pb-1">
+                        <a class="nav-link px-3" href="">About</a>
+                    </li>
+                    <li class="nav-item ms-lg-4 pb-1">
+                        <button id="btn-logout" class="btn btn-dark rounded-pill px-4">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="flex-grow-1">
+        <h2 class="text-center my-4">About Page</h2>
+        <div class="container my-5">
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body p-4">
+                            <h3 class="fw-bold mb-4 text-center">For Guests</h3>
+
+                            <ol class="ps-3">
+                                <li class="mb-3">
+                                    <strong>Create an Account</strong><br>
+                                    Sign up and log in as a Guest.
+                                </li>
+
+                                <li class="mb-3">
+                                    <strong>Find a Queue</strong><br>
+                                    Enter a Queue ID, browse Popular Queues, or view Active Queues.
+                                </li>
+
+                                <li class="mb-3">
+                                    <strong>View Queue Details</strong><br>
+                                    Check status, number of people waiting, and estimated wait time.
+                                </li>
+
+                                <li class="mb-3">
+                                    <strong>Join the Queue</strong><br>
+                                    Click “Join Queue” to secure your spot remotely.
+                                </li>
+
+                                <li>
+                                    <strong>Track Your Position</strong><br>
+                                    Monitor your place in line and exit anytime if needed.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card shadow-sm border-0 h-100">
+                        <div class="card-body p-4">
+                            <h3 class="fw-bold mb-4 text-center">For Hosts</h3>
+
+                            <ol class="ps-3">
+                                <li class="mb-3">
+                                    <strong>Create an Account</strong><br>
+                                    Sign up and log in as a Host.
+                                </li>
+
+                                <li class="mb-3">
+                                    <strong>Create a Queue</strong><br>
+                                    Provide queue name, address, estimated service time, and population limit.
+                                </li>
+
+                                <li class="mb-3">
+                                    <strong>Share the Queue ID</strong><br>
+                                    Provide the unique Queue ID to customers so they can join digitally.
+                                </li>
+
+                                <li class="mb-3">
+                                    <strong>Manage Your Queue</strong><br>
+                                    Monitor participants and control queue status.
+                                </li>
+
+                                <li>
+                                    <strong>Serve Efficiently</strong><br>
+                                    Call the next customer and manage the queue in real time.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+    <footer class="text-center py-2 border-top bg-light">
+        <p class="mb-0">&copy; 2026 Alex Joseph &middot; Rajiv Philip &middot; MIT License</p>
+    </footer>
+    <script src="./js/about.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

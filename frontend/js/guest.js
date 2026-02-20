@@ -13,6 +13,7 @@ const estimatedWait = document.getElementById("estimatedWait");
 const joinBtn = document.getElementById("btn-join");
 const positionSection = document.getElementById("positionSection");
 const exitBtn = document.getElementById("btn-exit");
+const logoutBtn = document.getElementById("btn-logout");
 
 async function loadQueueInfo() {
   try {
@@ -95,6 +96,25 @@ exitBtn.addEventListener("click", async () => {
     console.error(err);
   }
 });
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        alert("Logout failed");
+        return;
+      }
+
+      window.location.href = "/login.html";
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  });
+}
 
 loadQueueInfo();
 

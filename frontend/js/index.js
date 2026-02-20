@@ -5,6 +5,7 @@ const resultsTitle = document.getElementById("queue-results-title");
 const resultList = document.getElementById("result-list");
 const toggleBtn = document.getElementById("btn-popular-toggle");
 const toggleActiveBtn = document.getElementById("btn-active-toggle");
+const logoutBtn = document.getElementById("btn-logout");
 
 let currentView = null;
 
@@ -211,5 +212,24 @@ toggleActiveBtn.addEventListener("click", async () => {
   resultsSection.classList.remove("d-none");
   currentView = "active";
 });
+
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", async () => {
+    try {
+      const res = await fetch("/api/auth/logout", {
+        method: "POST",
+      });
+
+      if (!res.ok) {
+        alert("Logout failed");
+        return;
+      }
+
+      window.location.href = "/login.html";
+    } catch (err) {
+      console.error("Logout error:", err);
+    }
+  });
+}
 
 loadUser();
