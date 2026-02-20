@@ -6,6 +6,7 @@ import hostRouter from "./routes/host.js";
 import connectDB from "./db/dbConnection.js";
 import authRouter from "./routes/auth.js";
 import queueRouter from "./routes/queue.js";
+import MongoStore from "connect-mongo";
 
 dotenv.config();
 
@@ -14,16 +15,24 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.set("trust proxy", 1);
 
 app.use(
   session({
-    secret: "supersecret",
+    secret: process.env.SESSION_SECRET || "dev-secret",
     resave: false,
     saveUninitialized: false,
+
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      collectionName: "sessions",
+    }),
+
     cookie: {
       secure: process.env.NODE_ENV === "production",
       httpOnly: true,
       sameSite: "lax",
+      maxAge: 1000 * 60 * 60 * 24,
     },
   }),
 );
