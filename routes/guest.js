@@ -176,7 +176,7 @@ router.post("/exit/:queueId", async (req, res) => {
   }
 });
 
-// latest 10 queues
+// latest 20 queues
 // GET /api/guest/queues/latest
 router.get("/queues/latest", async (req, res) => {
   try {
@@ -186,7 +186,7 @@ router.get("/queues/latest", async (req, res) => {
       .collection("queues")
       .find({ status: "open" })
       .sort({ createdAt: -1 })
-      .limit(10)
+      .limit(20)
       .toArray();
 
     res.json(queues);
