@@ -226,4 +226,36 @@ router.post("/clearQueue", async (req, res) => {
   }
 });
 
+router.get("/getUserQueue", async (req, res) => {
+  try {
+    const userId = req.query.userId;
+
+    if (!userId) {
+      return res.status(400).json({ error: "Missing userId parameter" });
+    }
+
+    if (!ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid userId format" });
+    }
+
+    const db = await connectDB();
+
+    const userQueue = await db.collection("queues").findOne({
+      createdBy: userId,
+    });
+
+    if (!userQueue) {
+      return res.status(404).json({ error: "No queue found for this user" });
+    }
+
+    res.json({
+      success: true,
+      queue: userQueue,
+    });
+  } catch (error) {
+    console.error("Error fetching user queue:", error);
+    res.status(500).json({ error: "Server Error" });
+  }
+});
+
 export default router;
