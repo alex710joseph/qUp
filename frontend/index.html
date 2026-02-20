@@ -107,20 +107,22 @@
         </div>
       </div>
     </div>
-    <div class="container text-center mb-4">
+    <div class="justify-content-center mb-3 gap-3 d-flex">
       <button id="btn-popular-toggle" class="btn btn-outline-dark rounded-pill px-4 d-none">
         Load Popular Queues
       </button>
+      <button id="btn-active-toggle" class="btn btn-outline-dark rounded-pill px-4 d-none">
+        View Active Queues
+      </button>
     </div>
-    <div id="popular-queues" class="container mb-5 d-none">
+    <div id="queue-results" class="container d-none mb-3">
       <div class="row justify-content-center">
         <div class="col-md-10">
-          <h2 class="h4 mb-4 text-center">Popular Queues</h2>
-          <div id="popular-list" class="row g-4"></div>
+          <h2 id="queue-results-title" class="h4 mb-3 text-center"></h2>
+          <div id="result-list" class="row g-4"></div>
         </div>
       </div>
     </div>
-
   </main>
   <footer class="text-center py-2 border-top bg-light">
     <p class="mb-0">&copy; 2026 Alex Joseph &middot; Rajiv Philip &middot; MIT License</p>

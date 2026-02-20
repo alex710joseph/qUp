@@ -40,9 +40,11 @@ router.get("/queue/:queueId", async (req, res) => {
     // Check if this guest is already in queue
     const existingEntry = await db.collection("queue_guest").findOne({
       queue_id: new ObjectId(queueId),
-      user_id: guestId,
+      user_id: new ObjectId(guestId),
       activeFlag: "Y",
     });
+
+    console.log("Existing queue entry for guest:", existingEntry);
 
     let position = null;
     let isInQueue = false;
@@ -63,7 +65,11 @@ router.get("/queue/:queueId", async (req, res) => {
       activeFlag: "Y",
     });
 
-    const estimatedWait = waitingCount * queue.estimatedServiceTime;
+    let estimatedWait = waitingCount * queue.estimatedServiceTime;
+
+    if (isInQueue) {
+      estimatedWait = (position - 1) * queue.estimatedServiceTime;
+    }
 
     res.json({
       name: queue.name,
@@ -115,7 +121,7 @@ router.post("/join/:queueId", async (req, res) => {
     // Prevent same guest from joining twice
     const existingEntry = await db.collection("queue_guest").findOne({
       queue_id: new ObjectId(queueId),
-      user_id: guestId,
+      user_id: new ObjectId(guestId),
       activeFlag: "Y",
     });
 
@@ -125,7 +131,7 @@ router.post("/join/:queueId", async (req, res) => {
 
     const entry = {
       queue_id: new ObjectId(queueId),
-      user_id: guestId,
+      user_id: new ObjectId(guestId),
       timestamp: new Date(),
       activeFlag: "Y",
     };
@@ -155,7 +161,7 @@ router.post("/exit/:queueId", async (req, res) => {
 
     const result = await db.collection("queue_guest").deleteOne({
       queue_id: new ObjectId(queueId),
-      user_id: guestId,
+      user_id: new ObjectId(guestId),
       activeFlag: "Y",
     });
 
@@ -184,6 +190,43 @@ router.get("/queues/latest", async (req, res) => {
       .toArray();
 
     res.json(queues);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// active queues for current guest
+// GET /api/guest/queues/latest
+router.get("/queues/active", async (req, res) => {
+  try {
+    const db = await connectDB();
+    const guestId = req.session.userId;
+
+    const entries = await db
+      .collection("queue_guest")
+      .find({ user_id: new ObjectId(guestId), activeFlag: "Y" })
+      .toArray();
+
+    if (!entries.length) {
+      return res.json([]);
+    }
+
+    const queueIds = entries.map((entry) => entry.queue_id);
+
+    const queues = await db
+      .collection("queues")
+      .find({ _id: { $in: queueIds } })
+      .toArray();
+
+    const result = queues.map((queue) => ({
+      _id: queue._id,
+      name: queue.name,
+      address: queue.address,
+      status: queue.status,
+    }));
+
+    res.json(result);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });

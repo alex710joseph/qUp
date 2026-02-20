@@ -1,11 +1,12 @@
 const createQueueContainer = document.getElementById("create-queue");
 const joinQueueContainer = document.getElementById("join-queue");
-const popularSection = document.getElementById("popular-queues");
-const popularList = document.getElementById("popular-list");
+const resultsSection = document.getElementById("queue-results");
+const resultsTitle = document.getElementById("queue-results-title");
+const resultList = document.getElementById("result-list");
 const toggleBtn = document.getElementById("btn-popular-toggle");
+const toggleActiveBtn = document.getElementById("btn-active-toggle");
 
-let popularLoaded = false;
-let popularVisible = false;
+let currentView = null;
 
 async function loadUser() {
   try {
@@ -26,6 +27,7 @@ async function loadUser() {
     if (data.role == "guest") {
       joinQueueContainer.classList.remove("d-none");
       toggleBtn.classList.remove("d-none");
+      toggleActiveBtn.classList.remove("d-none");
     }
   } catch (err) {
     console.error("Error fetching user data:", err);
@@ -94,9 +96,10 @@ async function loadPopularQueues() {
 
     const queues = await res.json();
 
-    popularSection.classList.remove("d-none");
+    resultsTitle.textContent = "Popular Queues";
+    resultsSection.classList.remove("d-none");
 
-    popularList.innerHTML = "";
+    resultList.innerHTML = "";
 
     queues.forEach((queue) => {
       const col = document.createElement("div");
@@ -108,7 +111,7 @@ async function loadPopularQueues() {
             <h5 class="card-title">${queue.name}</h5>
             <p class="text-muted small">${queue.address}</p>
             <div class="d-grid mt-3">
-              <button class="btn btn-dark join-btn" data-id="${queue._id}">
+              <button class="btn btn-outline-dark join-btn" data-id="${queue._id}">
                 View Queue
               </button>
             </div>
@@ -116,10 +119,54 @@ async function loadPopularQueues() {
         </div>
       `;
 
-      popularList.appendChild(col);
+      resultList.appendChild(col);
     });
 
-    // Attach click events
+    document.querySelectorAll(".join-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const id = btn.getAttribute("data-id");
+        window.location.href = `/guest.html?id=${id}`;
+      });
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function loadActiveQueues() {
+  try {
+    const res = await fetch("/api/guest/queues/active");
+
+    if (!res.ok) return;
+
+    const queues = await res.json();
+
+    resultsTitle.textContent = "Active Queues";
+    resultsSection.classList.remove("d-none");
+
+    resultList.innerHTML = "";
+
+    queues.forEach((queue) => {
+      const col = document.createElement("div");
+      col.className = "col-md-6 col-lg-4";
+
+      col.innerHTML = `
+        <div class="card shadow-sm h-100 border-0">
+          <div class="card-body">
+            <h5 class="card-title">${queue.name}</h5>
+            <p class="text-muted small">${queue.address}</p>
+            <div class="d-grid mt-3">
+              <button class="btn btn-outline-dark join-btn" data-id="${queue._id}">
+                View Queue
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      resultList.appendChild(col);
+    });
+
     document.querySelectorAll(".join-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         const id = btn.getAttribute("data-id");
@@ -132,20 +179,37 @@ async function loadPopularQueues() {
 }
 
 toggleBtn.addEventListener("click", async () => {
-  if (!popularLoaded) {
-    await loadPopularQueues();
-    popularLoaded = true;
+  if (currentView === "popular") {
+    resultsSection.classList.add("d-none");
+    toggleBtn.textContent = "Load Popular Queues";
+    currentView = null;
+    return;
   }
 
-  if (popularVisible) {
-    popularSection.classList.add("d-none");
-    toggleBtn.textContent = "Load Popular Queues";
-    popularVisible = false;
-  } else {
-    popularSection.classList.remove("d-none");
-    toggleBtn.textContent = "Hide Popular Queues";
-    popularVisible = true;
+  await loadPopularQueues();
+
+  toggleBtn.textContent = "Hide Popular Queues";
+  toggleActiveBtn.textContent = "Load Active Queues";
+
+  resultsSection.classList.remove("d-none");
+  currentView = "popular";
+});
+
+toggleActiveBtn.addEventListener("click", async () => {
+  if (currentView === "active") {
+    resultsSection.classList.add("d-none");
+    toggleActiveBtn.textContent = "Load Active Queues";
+    currentView = null;
+    return;
   }
+
+  await loadActiveQueues();
+
+  toggleActiveBtn.textContent = "Hide Active Queues";
+  toggleBtn.textContent = "Load Popular Queues";
+
+  resultsSection.classList.remove("d-none");
+  currentView = "active";
 });
 
 loadUser();
