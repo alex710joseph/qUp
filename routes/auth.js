@@ -19,8 +19,14 @@ router.post("/login", async (req, res) => {
 
   req.session.userId = user._id;
   req.session.role = user.role;
+  req.session.username = user.username;
+  req.session.firstName = user.firstName;
 
-  res.json({ role: user.role });
+  res.json({
+    role: user.role,
+    username: user.username,
+    firstName: user.firstName,
+  });
 });
 
 router.post("/logout", (req, res) => {
@@ -37,6 +43,8 @@ router.get("/me", (req, res) => {
   res.json({
     userId: req.session.userId,
     role: req.session.role,
+    username: req.session.username,
+    firstName: req.session.firstName,
   });
 });
 
