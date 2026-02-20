@@ -1,16 +1,10 @@
-/* 1. Navbar Logo Box */
-.navbar-brand {
-    background-color: #e2e6ea !important; /* Bootstrap's gray-200 equivalent */
-    font-weight: 700;
-}
-
-/* 2. Control Section Inputs */
+/* 1. Control Section Inputs */
 .form-control[readonly] {
     background-color: transparent; /* Remove grey background from readonly inputs */
     opacity: 1;
 }
 
-/* 3. Queue Items (Active) */
+/* 2. Queue Items (Active) */
 #queue-list-active .list-group-item {
     border: 1px solid #dee2e6;
     margin-bottom: -1px; /* Collapse borders */
