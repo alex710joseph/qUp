@@ -1,7 +1,12 @@
 # qUp
-A virtual queue management platform designed to eliminate physical waiting lines.
+A virtual queue management platform designed to eliminate physical waiting lines. Name pronounced as "queue-up".
 
-Project Name: qUp (pronounced as "queue-up")
+## Description
+Description: qUp is a simple virtual queue management platform designed to eliminate physical waiting lines in various environments like campus career fairs, restaurants, food trucks, student health centers, barbershops, pharmacy pickups, amusement park rides. The web-application allows users to either create a virtual queue or lookup and join a virtual queue. Instead of standing in a physical line, a user can monitor their position and estimated wait time from their own devices, receiving a notification (popup) when they are next in line.
+
+Users who create queues are called as "Hosts" and the users who join queue are called "Guests".
+
+Members: Alex Joseph, Rajiv Philip
 
 ## Project resources link:
 - Github: https://github.com/alex710joseph/qUp
@@ -16,14 +21,6 @@ Project Name: qUp (pronounced as "queue-up")
 3. run command `npm install`
 3. run command `npm run start`
 4. the server starts on port 3000, navigate to localhost:3000 to start using the application
-
-## Members:
-- Alex Joseph
-- Rajiv Philip
-
-Description: qUp is a simple virtual queue management platform designed to eliminate physical waiting lines in various environments like campus career fairs, restaurants, food trucks, student health centers, barbershops, pharmacy pickups, amusement park rides. The web-application allows users to either create a virtual queue or lookup and join a virtual queue. Instead of standing in a physical line, a user can monitor their position and estimated wait time from their own devices, receiving a notification (popup) when they are next in line.
-
-Users who create queues are called as "Hosts" and the users who join queue are called "Guests".
 
 ## User Personas:
 
