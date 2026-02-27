@@ -22,6 +22,14 @@ Members: Alex Joseph, Rajiv Philip
 3. run command `npm run start`
 4. the server starts on port 3000, navigate to localhost:3000 to start using the application
 
+# Important: Test Usernames/Passwords to Login
+ ## User
+ 1. username - rajivphilip18
+ 2. password - user_test_pw
+ ## Host/Restaurant
+  1. username - mikes_diner
+  2. password - diner
+
 ## User Personas:
 
 1. The Busy Recruiter ("Melinda"): Needs to manage a long line of students at a career fair without causing a crowd at her booth. Wants a simple dashboard to "call" the next person when she is ready.
