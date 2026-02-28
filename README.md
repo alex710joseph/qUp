@@ -102,3 +102,6 @@ The host can "serve next", "stop queue" or "clear queue" in the queue management
 `While deploying the application on render, despite using express-session, the sessions do not work as intended. Is there a way to utilize mongo db for storing the sessions (without using mongoose)`.
 - Used Claude Sonnet 4.6 to come up with the polling logic for the `/api/guest/queue/${queueId}` endpoint to load latest queue information. Prompt used was:
 `I have an API that I need to call regularly every 15 seconds or so, in order to get the most recent information from the server. What would be the best way to keep invoking it every time interval.`
+
+
+Peer review Edit: I saw a small issue, when joined the queue and exited, I cant join the queue from the same screen again. Everything else looks perfect
